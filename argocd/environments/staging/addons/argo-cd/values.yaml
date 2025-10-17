@@ -1,0 +1,6 @@
+# Staging environment overrides for ArgoCD
+server:
+  service:
+    annotations:
+      external-dns.alpha.kubernetes.io/hostname: argocd.stg-us-east-1-01.staging.apono.io
+
