@@ -108,6 +108,10 @@ externalDns:
 externalSecrets:
   enable: false
 
+# External Secrets Configuration (ClusterSecretStore + ExternalSecrets)
+externalSecretsConfig:
+  enable: false
+
 # Gatekeeper Values
 gatekeeper:
   enable: false

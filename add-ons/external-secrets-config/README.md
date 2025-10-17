@@ -34,3 +34,4 @@ kubectl get externalsecret github-credentials -n argocd
 kubectl get secret github-credentials -n argocd
 ```
 
+
