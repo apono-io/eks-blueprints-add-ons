@@ -56,6 +56,11 @@ spec:
               - $values/{{metadata.annotations.addons_repo_basepath}}charts/addons/{{values.addonChart}}/values.yaml
               - $values/{{metadata.annotations.addons_repo_basepath}}environments/{{metadata.labels.environment}}/addons/{{values.addonChart}}/values.yaml
               - $values/{{metadata.annotations.addons_repo_basepath}}clusters/{{name}}/addons/{{values.addonChart}}/values.yaml
+            values: |
+              server:
+                service:
+                  annotations:
+                    external-dns.alpha.kubernetes.io/hostname: argocd.{{.metadata.annotations.aws_cluster_name}}.{{.metadata.annotations.eks_cluster_domain}}
       destination:
         namespace: '{{values.addonChartRepositoryNamespace}}'
         name: '{{name}}'
