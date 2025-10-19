@@ -61,7 +61,7 @@ spec:
               server:
                 service:
                   annotations:
-                    external-dns.alpha.kubernetes.io/hostname: argocd.{{.metadata.annotations.aws_cluster_name}}.{{.metadata.annotations.eks_cluster_domain}}
+                    external-dns.alpha.kubernetes.io/hostname: argocd.{{.metadata.annotations.eks_cluster_domain}}
       destination:
         namespace: '{{.values.addonChartRepositoryNamespace}}'
         name: '{{.name}}'
