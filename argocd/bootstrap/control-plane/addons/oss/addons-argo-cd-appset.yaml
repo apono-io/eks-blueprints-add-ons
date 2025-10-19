@@ -40,31 +40,31 @@ spec:
                 addonChartVersion: 5.45.0
   template:
     metadata:
-      name: addon-{{name}}-{{values.addonChart}}
+      name: addon-{{.name}}-{{.values.addonChart}}
     spec:
       project: default
       sources:
-        - repoURL: '{{metadata.annotations.addons_repo_url}}'
-          targetRevision: '{{metadata.annotations.addons_repo_revision}}'
+        - repoURL: '{{.metadata.annotations.addons_repo_url}}'
+          targetRevision: '{{.metadata.annotations.addons_repo_revision}}'
           ref: values
-        - chart: '{{values.addonChart}}'
-          repoURL: '{{values.addonChartRepository}}'
-          targetRevision: '{{values.addonChartVersion}}'
+        - chart: '{{.values.addonChart}}'
+          repoURL: '{{.values.addonChartRepository}}'
+          targetRevision: '{{.values.addonChartVersion}}'
           helm:
-            releaseName: '{{values.addonChart}}'
+            releaseName: '{{.values.addonChart}}'
             ignoreMissingValueFiles: true
             valueFiles:
-              - $values/{{metadata.annotations.addons_repo_basepath}}charts/addons/{{values.addonChart}}/values.yaml
-              - $values/{{metadata.annotations.addons_repo_basepath}}environments/{{metadata.labels.environment}}/addons/{{values.addonChart}}/values.yaml
-              - $values/{{metadata.annotations.addons_repo_basepath}}clusters/{{name}}/addons/{{values.addonChart}}/values.yaml
+              - $values/{{.metadata.annotations.addons_repo_basepath}}charts/addons/{{.values.addonChart}}/values.yaml
+              - $values/{{.metadata.annotations.addons_repo_basepath}}environments/{{.metadata.labels.environment}}/addons/{{.values.addonChart}}/values.yaml
+              - $values/{{.metadata.annotations.addons_repo_basepath}}clusters/{{.name}}/addons/{{.values.addonChart}}/values.yaml
             values: |
               server:
                 service:
                   annotations:
                     external-dns.alpha.kubernetes.io/hostname: argocd.{{.metadata.annotations.aws_cluster_name}}.{{.metadata.annotations.eks_cluster_domain}}
       destination:
-        namespace: '{{values.addonChartRepositoryNamespace}}'
-        name: '{{name}}'
+        namespace: '{{.values.addonChartRepositoryNamespace}}'
+        name: '{{.name}}'
       syncPolicy:
         automated:
           prune: false
