@@ -1,0 +1,7 @@
+# Default values for external-secrets-config
+# This Helm chart deploys ClusterSecretStore and ExternalSecret resources
+
+# AWS Region for Secrets Manager
+# This should be overridden by ArgoCD ApplicationSet to match the cluster region
+aws_region: us-east-1
+
