@@ -66,6 +66,10 @@ spec:
                 - {{default "" .metadata.annotations.eks_cluster_domain}}
               txtOwnerId: {{.metadata.annotations.aws_cluster_name}}
               policy: {{default "upsert-only" .metadata.annotations.external_dns_policy}}
+              {{- with index .metadata.annotations "external_dns_aws_zone_type" }}
+              extraArgs:
+                - --aws-zone-type={{ . }}
+              {{- end }}
       destination:
         namespace: '{{.metadata.annotations.external_dns_namespace}}'
         name: '{{.name}}'
