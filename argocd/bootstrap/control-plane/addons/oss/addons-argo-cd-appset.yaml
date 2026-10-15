@@ -65,6 +65,12 @@ spec:
                     {{- with index .metadata.annotations "lb_subnets" }}
                     service.beta.kubernetes.io/aws-load-balancer-subnets: {{ . }}
                     {{- end }}
+                    {{- with index .metadata.annotations "acm_certificate_arn" }}
+                    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: {{ . }}
+                    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
+                    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: ssl
+                    service.beta.kubernetes.io/aws-load-balancer-ssl-negotiation-policy: ELBSecurityPolicy-TLS13-1-2-2021-06
+                    {{- end }}
       destination:
         namespace: '{{.values.addonChartRepositoryNamespace}}'
         name: '{{.name}}'
